@@ -1,10 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 const TodoEditor = ({
   addTodo,
 }: {
   addTodo: ({ text }: { text: string }) => void;
 }) => {
+  // console.log("editor render");
+
   const [todo, setTodo] = useState("");
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -28,4 +30,4 @@ const TodoEditor = ({
     </>
   );
 };
-export default TodoEditor;
+export default React.memo(TodoEditor);

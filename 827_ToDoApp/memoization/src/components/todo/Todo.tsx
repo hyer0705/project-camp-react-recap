@@ -1,18 +1,20 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import TodoEditor from "./TodoEditor";
 import TodoList from "./TodoList";
 import { TTodo } from "../../types/todo";
 
 const Todo = () => {
   const [todos, setTodos] = useState<TTodo[]>([]);
-  const addTodo = ({ text }: { text: string }) => {
+  const addTodo = useCallback(({ text }: { text: string }) => {
     setTodos((todos) => [...todos, { id: Date.now(), text, isDone: false }]);
-  };
+  }, []);
 
-  const deleteTodo = (id: number) =>
-    setTodos((todos) => todos.filter((todo) => todo.id !== id));
+  const deleteTodo = useCallback(
+    (id: number) => setTodos((todos) => todos.filter((todo) => todo.id !== id)),
+    []
+  );
 
-  const toggleCheckTodo = (id: number) => {
+  const toggleCheckTodo = useCallback((id: number) => {
     setTodos((todos) =>
       todos.map((todo) => {
         if (todo.id === id) {
@@ -20,7 +22,7 @@ const Todo = () => {
         } else return todo;
       })
     );
-  };
+  }, []);
 
   return (
     <>

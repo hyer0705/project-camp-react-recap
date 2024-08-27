@@ -1,5 +1,6 @@
 import { twMerge } from "tailwind-merge";
 import { TTodo } from "../../types/todo";
+import React from "react";
 
 const TodoListItem = ({
   todo,
@@ -10,6 +11,8 @@ const TodoListItem = ({
   deleteTodo: (id: number) => void;
   toggleCheckTodo: (id: number) => void;
 }) => {
+  console.log("TodoListItem render");
+
   const { id, text, isDone } = todo;
 
   return (
@@ -36,4 +39,4 @@ const TodoListItem = ({
     </>
   );
 };
-export default TodoListItem;
+export default React.memo(TodoListItem);
